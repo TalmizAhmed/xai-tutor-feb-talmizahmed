@@ -8,7 +8,7 @@ app = FastAPI(title="Backend Exercise API", version="1.0.0")
 # CORS – allow the frontend (port 3000) to call the API (port 8000)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

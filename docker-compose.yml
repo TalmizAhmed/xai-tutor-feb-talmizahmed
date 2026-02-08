@@ -7,6 +7,12 @@ services:
       - ./backend/data:/app/data
     environment:
       - DATABASE_PATH=/app/data/app.db
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   frontend:
     build: ./frontend
@@ -15,4 +21,5 @@ services:
     environment:
       - NODE_ENV=production
     depends_on:
-      - api
+      api:
+        condition: service_healthy
